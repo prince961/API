@@ -9,13 +9,13 @@ const orderSchema = new schema({
         {
             add: {
               type: String,
-              required : [true,"name of the Ninja is missing in the request"]
+              required : [true,"add field is mandatory"]
 
             },
             "address_type": {
               "type": "string",
                enum:{
-                 values:  ["a","b"],
+                 values:  ["home","office"],
                  message : "address type can be either home or office\n"
                }
             },
