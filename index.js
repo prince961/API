@@ -23,9 +23,28 @@ mongoose.connect(uri,options).then(
     }
   );
 
+  var auth = function(req, res, next){
+    var authorization = req.headers.authorization;
+    console.log(authorization);
+  
+    var userPass = authorization.split(' ')[1];
+    var plainText = Buffer.from(userPass, "base64").toString("ascii");
+  
+    var userName = plainText.split(":")[0];
+    var password = plainText.split(":")[1];
 
+  console.log(authorization);
+    if(password == "E01e123"){
+      next();
+    }else{
+      res.send("authentication failed");
+      res.status(401);
+    }
+  
+  }  
   
 app.use(bodyParser.json()); 
+app.use(auth);
 app.use("/api",routes);
 
 //error handling middleware
