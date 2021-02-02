@@ -82,7 +82,8 @@ const orderSchema = new schema({
               "type": "string"
             },
             "weight": {
-              "type": [Number, "weight should be a number"]
+              "type": Number,
+              message: "weight needs to be in grams"
             },
             "return_state": {
               "type": "string"
