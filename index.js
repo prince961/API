@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const routes =require("./Routes/api");
 const mongoose = require('mongoose');
+var LocalStorage = require('node-localstorage').LocalStorage;
+localStorage = new LocalStorage('./scratch');
+
 
 const app = express();
 
@@ -36,8 +39,9 @@ mongoose.connect(uri,options).then(
   
     var userName = plainText.split(":")[0];
     var password = plainText.split(":")[1];
+    localStorage.setItem("userName",userName);
 
-    console.log(password);
+    console.log("password is: "+password);
     if(password == "E01e123"){
       next();
     }else{

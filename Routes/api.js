@@ -4,12 +4,13 @@ const Ninja = require('../Models/order');
 const router = express.Router();
 
 
+
 router.get("/orders",function(req, res,next){
     res.send({type:"GET"});
 })
 
 router.post("/orders",function(req, res, next){
-    userName = 'a123';
+    userName = localStorage.getItem("userName");
     var order = req.body;
     order.pickup_location["CustomerCode"]=userName;
     console.log(order);
