@@ -3,7 +3,6 @@ const schema =mongoose.Schema;
 
 const orderSchema = new schema({
   type: Object,
-  
     shipments: 
       [
         {
@@ -238,6 +237,9 @@ const orderSchema = new schema({
       ],
     "pickup_location": {
       type: Object,
+      CostomerCode: {
+        type: String
+      },
         "name": {
           "type": "string"
         },

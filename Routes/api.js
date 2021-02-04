@@ -9,7 +9,11 @@ router.get("/orders",function(req, res,next){
 })
 
 router.post("/orders",function(req, res, next){
-    Ninja.create(req.body).then(function(ninja){
+    userName = 'a123';
+    var order = req.body;
+    order.pickup_location["CustomerCode"]=userName;
+    console.log(order);
+    Ninja.create(order).then(function(ninja){
         res.send(ninja);
         console.log("Ninja created with id: "+ninja.id);
     }).catch(next); 
