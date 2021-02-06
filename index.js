@@ -4,6 +4,8 @@ const routes =require("./Routes/api");
 const mongoose = require('mongoose');
 var LocalStorage = require('node-localstorage').LocalStorage;
 localStorage = new LocalStorage('./scratch');
+const User = require('./Models/user');
+const { db } = require('./Models/user');
 
 
 const app = express();
@@ -36,13 +38,20 @@ mongoose.connect(uri,options).then(
     {
     var userPass = authorization.split(' ')[1];
     var plainText = Buffer.from(userPass, "base64").toString("ascii");
-  
     var userName = plainText.split(":")[0];
     var password = plainText.split(":")[1];
     localStorage.setItem("userName",userName);
+    var dbUserPassword;
 
-    console.log("password is: "+password);
-    if(password == "E01e123"){
+    //Query DB for credentials
+    User.findOne({"userName": userName}).then(function(dbUser){  
+    localStorage.setItem("userPassword",dbUser.password);
+    dbUserPassword = dbUser.password;
+  });
+
+    console.log("Authentication password is: "+password);
+    console.log("dbUser: "+dbUserPassword);
+    if(password  === localStorage.getItem("userPassword") ){
       next();
     }else{
       res.send("authentication failed");
