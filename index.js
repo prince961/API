@@ -71,8 +71,6 @@ app.use("/api",routes);
 //error handling middleware
 app.use(function(err,req,res,next){
     console.log(err);
-    res.header("access-Control-Allow-Origin","*");
-    res.header("access-Control-Allow-Origin","Origin, X-Requested-With, Content-Type,Accept");
     res.status(422).send("error: "+ err);
 });
 
