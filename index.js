@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors')
 const bodyParser = require("body-parser");
 const routes =require("./Routes/api");
 const mongoose = require('mongoose');
@@ -9,7 +10,7 @@ const { db } = require('./Models/user');
 
 
 const app = express();
-
+app.use(cors());
 //Connect to Mongo DB
 mongoose.Promise = global.Promise;
 const uri = "mongodb+srv://admin:admin@cluster0.h7wqs.mongodb.net/apiLogistics?retryWrites=true&w=majority";
@@ -52,8 +53,11 @@ mongoose.connect(uri,options).then(
     console.log("Authentication password is: "+password);
     console.log("dbUser: "+dbUserPassword);
     if(password  === localStorage.getItem("userPassword") ){
+      localStorage.setItem("userPassword","NA");
       next();
     }else{
+      res.header("access-Control-Allow-Origin","*");
+    res.header("access-Control-Allow-Origin","Origin, X-Requested-With, Content-Type,Accept");
       res.send("authentication failed");
       res.status(401);
     }
@@ -68,6 +72,8 @@ app.use("/api",routes);
 //error handling middleware
 app.use(function(err,req,res,next){
     console.log(err);
+    res.header("access-Control-Allow-Origin","*");
+    res.header("access-Control-Allow-Origin","Origin, X-Requested-With, Content-Type,Accept");
     res.status(422).send("error: "+ err);
 });
 
