@@ -56,8 +56,7 @@ mongoose.connect(uri,options).then(
       localStorage.setItem("userPassword","NA");
       next();
     }else{
-      res.header("access-Control-Allow-Origin","*");
-    res.header("access-Control-Allow-Origin","Origin, X-Requested-With, Content-Type,Accept");
+      
       res.send("authentication failed");
       res.status(401);
     }
