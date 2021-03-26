@@ -42,6 +42,7 @@ mongoose.connect(uri,options).then(
     var userName = plainText.split(":")[0];
     var password = plainText.split(":")[1];
     localStorage.setItem("userName",userName);
+    console.log("userName from local storage"+localStorage.getItem("userName"));
     var dbUserPassword;
 
     //Query DB for credentials

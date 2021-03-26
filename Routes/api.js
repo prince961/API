@@ -10,7 +10,8 @@ router.get("/orders",function(req, res,next){
 })
 
 router.post("/orders",function(req, res, next){
-    userName = localStorage.getItem("userName");
+    let userName = localStorage.getItem("userName");
+    console.log(userName);
     var order = req.body;
     order.pickup_location["CustomerCode"]=userName;
     console.log(order);
