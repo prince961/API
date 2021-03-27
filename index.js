@@ -71,6 +71,7 @@ const options = {
   dbName: "Users",
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 };
 mongoose.connect(uri, options).then(
   () => {
