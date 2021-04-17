@@ -1,6 +1,6 @@
 const Pincode = require("../Models/pincode");
 exports.getPincode = async (req, res, next) => {
-  console.log(req.body.pid);
+  console.log(req.params.pid);
   const id = req.params.pid;
   // const data = pincode.filter((p) => p.id === +id);
   let data;

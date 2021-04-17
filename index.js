@@ -1,9 +1,9 @@
 const express = require("express");
 var cors = require("cors");
-const bodyParser = require("body-parser");
 const orderRoutes = require("./Routes/orders.route");
 const pincodeRoute = require("./Routes/pincode.route");
 const authRoute = require("./Routes/auth.route");
+const trackRoute = require("./Routes/track.route");
 const mongoose = require("mongoose");
 
 const HttpError = require("./models/http-error");
@@ -51,11 +51,13 @@ app.use(cors());
 
 // using routes
 
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // app.use(auth);
 app.use("/api", orderRoutes);
 app.use("/api/pincode", pincodeRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/track", trackRoute);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
