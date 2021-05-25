@@ -4,6 +4,7 @@ const orderRoutes = require("./Routes/orders.route");
 const pincodeRoute = require("./Routes/pincode.route");
 const authRoute = require("./Routes/auth.route");
 const trackRoute = require("./Routes/track.route");
+const rateRoute = require("./Routes/rate.route");
 const mongoose = require("mongoose");
 
 const HttpError = require("./models/http-error");
@@ -58,6 +59,7 @@ app.use("/api", orderRoutes);
 app.use("/api/pincode", pincodeRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/track", trackRoute);
+app.use("/api/rate", rateRoute);
 
 app.use((req, res, next) => {
   const error = new HttpError("Could not find this route.", 404);
